@@ -54,7 +54,4 @@ public class ProductDAO {
 		}
 		return total;
 	}
-	
-
-
 }

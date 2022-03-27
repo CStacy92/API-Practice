@@ -16,7 +16,6 @@ public class HelloWorldController {
 	@Autowired
 	ProductDAO p = new ProductDAO();
 	
-	
 	@GetMapping("/hello/{name}")
 	public String helloWorld(@PathVariable("name") String name) {
 		System.out.println("Hello ");
@@ -50,4 +49,5 @@ public class HelloWorldController {
 	public double cartTotal() {
 		return p.cartTotal();
 	}
+
 }
