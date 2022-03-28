@@ -2,7 +2,7 @@ package com.example.demoAPI;
 
 public class ProductDetails {
 
-	@Id
+	
 	private int productID;
 	private String productName;
 	private double productPrice;
