@@ -1,5 +1,10 @@
+
 package com.example.demoAPI;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class ProductDetails {
 
 	@Id
