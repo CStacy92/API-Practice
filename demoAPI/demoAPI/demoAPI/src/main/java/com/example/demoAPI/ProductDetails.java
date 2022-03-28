@@ -7,7 +7,7 @@ import javax.persistence.Id;
 @Entity
 public class ProductDetails {
 
-	@Id
+	
 	private int productID;
 	private String productName;
 	private double productPrice;
