@@ -2,13 +2,16 @@
 package com.example.demoAPI;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class ProductDetails {
 
-	
-	private int productID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long productID;
 	private String productName;
 	private double productPrice;
 	private String description;
