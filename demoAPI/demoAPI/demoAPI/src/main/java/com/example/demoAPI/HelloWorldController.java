@@ -1,6 +1,6 @@
 package com.example.demoAPI;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
 	
 	@Autowired
-	ProductDAO p = new ProductDAO();
+	ProductDetailsJPA cart;
 	
 	@GetMapping("/hello/{name}")
 	public String helloWorld(@PathVariable("name") String name) {
@@ -22,32 +22,37 @@ public class HelloWorldController {
 		return "Return -- Hello my name is " + name;
 	}
 	
+	
 	@GetMapping("/cartProducts")
-	public ArrayList<ProductDetails> productsInCart() {
-		return p.showCart();
+	public List<ProductDetails> productsInCart() {
+		return cart.findAll();
 	}
 	
 	@PostMapping("/addProduct")
 	public String addProduct(@RequestBody ProductDetails item) {
-		p.addProduct(item);
-		return "Product Added Successfully - " + item.getProductName();
+		cart.save(item);
+		return "Product Added Successfully";
 	}
 	
 	//FIX
-	@DeleteMapping("/removeProduct/{itemName}")
-	public String removeProduct(@PathVariable("itemName") String itemName) {
-		p.removeProduct(itemName);
-		return "Product Removed From Cart - " + itemName;
+	@DeleteMapping("/removeProduct/{itemID}")
+	public String removeProduct(@PathVariable("itemID") long itemID) {
+		cart.deleteById(itemID);
+		return "Item removed from cart";
 	}
 	
 	@GetMapping("/cartCount")
-	public int cartCount() {
-		return p.cartCount();
+	public long cartCount() {
+		return cart.count();
 	}
 	
 	@GetMapping("/cartTotal")
 	public double cartTotal() {
-		return p.cartTotal();
+		double total = 0;
+		for(ProductDetails item : cart.findAll()) {
+			total += item.getProductPrice();
+		}
+		return total;
 	}
 
 }
